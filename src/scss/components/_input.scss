@@ -1,0 +1,13 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the input component.
+// -----------------------------------------------------------------------------
+
+.form-movie-search {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+.movie-search {
+  max-width: 450px;
+}

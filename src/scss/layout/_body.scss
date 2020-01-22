@@ -1,0 +1,26 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the body of the site/application.
+// -----------------------------------------------------------------------------
+.jumbotron {
+    background-color: $jumbotron-color;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+}
+
+@media (min-width: map-get($breakpoints, xlarge)){
+    section {
+        .container {
+            width: 640px;
+        }
+    }
+}
+
+// div {
+//     .container {
+//         width: 640px;
+//     }
+// }
+

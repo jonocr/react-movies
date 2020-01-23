@@ -2,25 +2,23 @@
 // This file contains all styles related to the body of the site/application.
 // -----------------------------------------------------------------------------
 .jumbotron {
-    background-color: $jumbotron-color;
+  background-color: $jumbotron-color;
+  padding-top: 4rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  margin-bottom: 0px;
 }
 
 .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
+  font-size: 1.125rem;
+  text-anchor: middle;
 }
 
-@media (min-width: map-get($breakpoints, xlarge)){
-    section {
-        .container {
-            width: 640px;
-        }
+@media (min-width: map-get($breakpoints, xlarge)) {
+  section {
+    .container {
+      width: 640px;
     }
+  }
 }
-
-// div {
-//     .container {
-//         width: 640px;
-//     }
-// }
-

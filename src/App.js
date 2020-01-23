@@ -10,26 +10,29 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      history: [{
-        squares: Array(9).fill(null),
-      }],
-      stepNumber: 0,
-      xIsNext: true,
+      key: "41f841b3",
+      apiUrl: "http://www.omdbapi.com/?apikey=",
+      query: "blade",
       loading: true
     };
   }
 
   async componentDidMount() {
-    //http://www.omdbapi.com/?s=blade&apikey=41f841b3
-    //http://jsonplaceholder.typicode.com/users
-    const api = "http://www.omdbapi.com/?s=blade&apikey=41f841b3";
-    const response = await fetch(api);
-    const data = await response.json();
+    this.getMovieData();
+    // const url = this.state.apiUrl;
+    // const key = this.state.key;
+    // const query = this.state.query;
 
-    this.setState({
-      movies: data.Search,
-      loading: false
-    });
+    // //http://www.omdbapi.com/?s=blade&apikey=41f841b3
+    // //http://jsonplaceholder.typicode.com/users
+    // const api = "http://www.omdbapi.com/?s=blade&apikey=41f841b3";
+    // const response = await fetch(url+key+"&s="+query);
+    // const data = await response.json();
+
+    // this.setState({
+    //   movies: data.Search,
+    //   loading: false
+    // });
 
 
     // fetch('http://jsonplaceholder.typicode.com/users')
@@ -39,6 +42,29 @@ class App extends React.Component {
     //     })
     //     .catch(console.log)
   }
+
+  async getMovieData (q) {
+    const url = this.state.apiUrl;
+    const key = this.state.key;
+    const query = (q) ? q : this.state.query;
+    console.log('getMovieData query: ', url+key+"&s="+query);
+    const response = await fetch(url+key+"&s="+query);
+    const data = await response.json();
+
+    this.setState({
+      movies: data.Search,
+      loading: false
+    });
+  }
+
+  handleClick(e, i) {
+    e.preventDefault();
+    this.setState({
+      query: i
+    })
+    this.getMovieData(i);
+  }
+
   render() {
     const data = this.state.movies;
     const loading = this.state.loading;
@@ -59,7 +85,7 @@ class App extends React.Component {
         <NavBar></NavBar>
 
         <main role="main">
-          <Hero></Hero>
+          <Hero onClick={(e,i) => this.handleClick(e,i)}></Hero>
           {/* <Directory></Directory> */}
 
           <div className="album py-5 bg-light">

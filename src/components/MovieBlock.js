@@ -10,8 +10,8 @@ function MovieBlock(props) {
 // ​​
 // imdbID: "tt0083658"
     return (
-        <div className="col-md-4">
-            <div className="card mb-4 shadow-sm">
+        <div className="col-md-3">
+            <div className="card mb-3 shadow-sm">
                 <img className="bd-placeholder-img card-img-top"
                     width="100%" 
                     height="375"

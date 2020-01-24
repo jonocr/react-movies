@@ -1,10 +1,14 @@
 import React from 'react';
 import './main.css';
-import Directory from './components/Directory';
 import NavBar from './components/layout/NavBar';
 import Hero from './components/layout/Hero';
 import Footer from './components/layout/Footer';
 import MovieBlock from './components/MovieBlock';
+
+const API = {
+  KEY: "41f841b3",
+  URL: "http://www.omdbapi.com/?apikey="
+};
 
 class App extends React.Component {
   constructor(props) {
@@ -19,9 +23,6 @@ class App extends React.Component {
 
   async componentDidMount() {
     this.getMovieData();
-    // const url = this.state.apiUrl;
-    // const key = this.state.key;
-    // const query = this.state.query;
 
     // //http://www.omdbapi.com/?s=blade&apikey=41f841b3
     // //http://jsonplaceholder.typicode.com/users
@@ -43,56 +44,67 @@ class App extends React.Component {
     //     .catch(console.log)
   }
 
-  async getMovieData (q) {
-    const url = this.state.apiUrl;
-    const key = this.state.key;
+  async getMovieData(q) {
     const query = (q) ? q : this.state.query;
-    console.log('getMovieData query: ', url+key+"&s="+query);
-    const response = await fetch(url+key+"&s="+query);
+    const response = await fetch(API.URL + API.KEY + "&s=" + query);
     const data = await response.json();
 
-    this.setState({
-      movies: data.Search,
-      loading: false
-    });
+    if (data.Response) {
+      this.setState({
+        movies: data.Search,
+        query: query,
+        loading: false
+      });
+    }
   }
 
   handleClick(e, i) {
     e.preventDefault();
-    this.setState({
-      query: i
-    })
     this.getMovieData(i);
+  }
+
+  renderMovie(movie, index) {
+    return (
+      <MovieBlock
+        id={movie.imdbID}
+        key={index}
+        Title={movie.Title}
+        Poster={movie.Poster} >
+      </MovieBlock>
+    )
   }
 
   render() {
     const data = this.state.movies;
     const loading = this.state.loading;
-    let listMoviesBlocks = "";
+    let movies = [];
 
-    if (!loading) {
-      console.log("api response: ", data);
-      listMoviesBlocks = data.map((movie) =>
-        <MovieBlock
-          key={movie.imdbID}
-          Title={movie.Title}
-          Poster={movie.Poster} >
-        </MovieBlock>
-      );
+    if (!loading && data) {
+      for (let i = 0; i < data.length; i++) {
+        movies.push(
+          <MovieBlock
+            id={data[i].imdbID}
+            key={i}
+            Title={data[i].Title}
+            Poster={data[i].Poster} >
+          </MovieBlock>
+        )
+      }
     }
+
     return (
       <React.Fragment>
         <NavBar></NavBar>
 
         <main role="main">
-          <Hero onClick={(e,i) => this.handleClick(e,i)}></Hero>
+          <Hero onClick={(e, i) => this.handleClick(e, i)}></Hero>
           {/* <Directory></Directory> */}
 
           <div className="album py-5 bg-light">
             <div className="container">
 
               <div className="row">
-                {listMoviesBlocks}
+                {(data) ? movies : "No Results Found"}
               </div>
             </div>
           </div>

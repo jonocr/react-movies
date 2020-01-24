@@ -9,10 +9,20 @@ class Hero extends React.Component {
     }
 
     handleClick(e) {
+        e.preventDefault();
         const query = e.target.value;
         this.setState({
             query: query
         });
+    }
+
+    //
+    onKeyPress(e) {
+        const query = e.target.value;
+        if(e.key === 'Enter'){
+            e.preventDefault();
+            this.props.onClick(e, query);
+        }
     }
     
     render() {
@@ -28,7 +38,9 @@ class Hero extends React.Component {
                                 <input 
                                     className="form-control form-control-lg movie-search" 
                                     type="text" 
+                                    value={this.state.query}
                                     onChange={(e) => this.handleClick(e)}
+                                    onKeyPress={(e) => this.onKeyPress(e)}
                                     placeholder="Search...">
                                 </input>
                             </form>

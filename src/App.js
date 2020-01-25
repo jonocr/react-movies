@@ -94,7 +94,7 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
-        <NavBar></NavBar>
+        <NavBar onClick={(e, i) => this.handleClick(e, i)}></NavBar>
 
         <main role="main">
           <Hero onClick={(e, i) => this.handleClick(e, i)}></Hero>

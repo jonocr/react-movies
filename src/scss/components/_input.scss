@@ -9,5 +9,10 @@
 }
 
 .movie-search {
-  max-width: 400px;
+  max-width: 130px;
+}
+@media (min-width: map-get($breakpoints, xlarge)) {
+  .movie-search {
+    max-width: 400px;
+  }
 }

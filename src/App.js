@@ -97,7 +97,7 @@ class App extends React.Component {
         <NavBar onClick={(e, i) => this.handleClick(e, i)}></NavBar>
 
         <main role="main">
-          <Hero onClick={(e, i) => this.handleClick(e, i)}></Hero>
+          {/* <Hero onClick={(e, i) => this.handleClick(e, i)}></Hero> */}
           {/* <Directory></Directory> */}
 
           <div className="album py-5 bg-light">

@@ -14,8 +14,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      key: "41f841b3",
-      apiUrl: "http://www.omdbapi.com/?apikey=",
       query: "blade",
       loading: true
     };

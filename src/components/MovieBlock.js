@@ -1,14 +1,6 @@
 import React from "react";
 
 function MovieBlock(props) {
-//     Poster: 
-// Title: "Blade Runner"
-// ​​
-// Type: "movie"
-// ​​
-// Year: "1982"
-// ​​
-// imdbID: "tt0083658"
     return (
         <div className="col-md-3">
             <div className="card mb-3 shadow-sm">
@@ -20,13 +12,11 @@ function MovieBlock(props) {
                     focusable="false"
                     role="img"></img>
                 <div className="card-body">
-                <p className="card-text">{props.Title}</p>
+                <p className="card-text font-weight-bold">{props.Title} ({props.Year})</p>
                 <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group">
-                        <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
-                        <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+                        <button type="button" className="btn btn-md btn-outline-secondary" onClick={(e, i) => props.onClick(e, props.imdbID)}>View</button>
                     </div>
-                    <small className="text-muted">9 mins</small>
                 </div>
                 </div>
             </div>

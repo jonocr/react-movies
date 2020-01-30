@@ -1,38 +1,19 @@
 ## React Movie Data Base
-This is a react project of movies. User can search for movies in this site. For this project React, Bootstrap, SASS, GULP and REST API was used.
+This is a react project of movies. User can search for movies in this site and see the details. For this project React, Bootstrap, SASS, GULP and REST API was used.
 
-## Project Structure
-my-app/
-  README.md
-  node_modules/
-  package.json
-  public/
-    index.html
-    favicon.ico
-    manifext.json
-    robots.txt
-  src/
-    Game.js
-    App.test.js
-    index.css
-    index.js
-    main.css
-    components/
-        layout/
-            Footer.js
-            Hero.js
-            NavBar.js
-        Directory.js
-        MovieBlock.js
+<p align="center">
+  <img src="./src/assets/images/LandingPage.jpg">
+</p>
+<p align="center">
+  <img src="./src/assets/images/DetailPage.jpg">
+</p>
+
 
 ## Live Game Example
 Coming soon
 
 ## Styles
 This app was developed mobile first and it is responsive.
-
-
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -62,6 +43,11 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `gulp watch`
+
+Watches any changes in the Sass files and compiles a new css file.
+
 
 
 

@@ -11,7 +11,7 @@ function MovieBlock(props) {
                     preserveAspectRatio="xMidYMid slice" 
                     focusable="false"
                     role="img"></img>
-                <div className="card-body">
+                <div id="card-body" className="card-body">
                 <p className="card-text font-weight-bold">{props.Title} ({props.Year})</p>
                 <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group">

@@ -6,34 +6,75 @@ import MovieBlock from './components/MovieBlock';
 import MovieDetail from './components/MovieDetail';
 
 const API = {
-  KEY: "41f841b3",
-  URL: "http://www.omdbapi.com/?apikey="
+  KEY: "&api_key=5e5bec981504e27f1d0e7022e076e148",
+  URL: "https://api.themoviedb.org/3/search/movie?page=1&include_adult=false",
+  QUERY: "&query=",
+  GET_MOVIE_BY_ID: "https://api.themoviedb.org/3/movie/",
+  GET_MOVIES_DISCOVER: "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&include_adult=false&include_video=false&page=1",
+  POSTERPATH: "https://image.tmdb.org/t/p/w500/",
+  LANGUAGE: "&language=en-US"
 };
+
+/*
+results: (20) […]
+​​
+0: {…}
+​​​
+adult: false
+​​​
+backdrop_path: "/6fkqwqLEcDZOEAnBBfKAniwNxtx.jpg"
+​​​
+genre_ids: Array [ 35, 10749 ]
+​​​
+id: 475303
+​​​
+original_language: "en"
+​​​
+original_title: "A Rainy Day in New York"
+​​​
+overview: "Two young people arrive in New York to spend a weekend, but once they arrive they're met with bad weather and a series of adventures."
+​​​
+popularity: 1452.5
+​​​
+poster_path: "/uPGq1mkEXznUpapDmOSxbsybjfp.jpg"
+​​​
+release_date: "2019-07-26"
+​​​
+title: "A Rainy Day in New York"
+​​​
+video: false
+​​​
+vote_average: 6.7
+​​​
+vote_count: 643
+
+
+
+
+*/
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       query: "blade",
+      movieId: "",
       loading: true
     };
   }
 
   async componentDidMount() {
     this.getMovieData();
-    // //http://www.omdbapi.com/?s=blade&apikey=41f841b3
-    // //http://jsonplaceholder.typicode.com/users
-
   }
 
   async getMovieData(q) {
-    const query = (q) ? q : this.state.query;
-    const response = await fetch(API.URL + API.KEY + "&s=" + query);
-    const data = await response.json();
+    const query = (q) ? API.URL + API.QUERY + q + API.KEY : API.GET_MOVIES_DISCOVER + API.LANGUAGE + API.KEY;
+    const response = await fetch(query);
+    const data = await response.json();    
 
-    if (data.Response) {
+    if (data.results) {
       this.setState({
-        movies: data.Search,
+        movies: data.results,
         movie: null,
         query: query,
         loading: false
@@ -42,14 +83,14 @@ class App extends React.Component {
   }
 
   async getMovieDataById(q) {
-    const query = (q) ? q : this.state.query;
-    const response = await fetch(API.URL + API.KEY + "&i=" + query);
+    const response = await fetch(API.GET_MOVIE_BY_ID + q + "?" + API.KEY);
     const data = await response.json();
 
-    if (data.Response) {
+    console.log("getMovieDataById: ", data);
+
+    if (data) {
       this.setState({
         movie: data,
-        query: query,
         loading: false
       });
     }
@@ -63,10 +104,10 @@ class App extends React.Component {
   renderMovie(movie, index) {
     return (
       <MovieBlock
-        id={movie.imdbID}
+        id={movie.id}
         key={index}
-        Title={movie.Title}
-        Poster={movie.Poster} >
+        Title={movie.original_title}
+        Poster={movie.poster_path} >
       </MovieBlock>
     )
   }
@@ -82,17 +123,21 @@ class App extends React.Component {
     const loading = this.state.loading;
     let movies = [];
 
+    console.log("render movie data: ", movie);
+
     if (!loading && data) {
       for (let i = 0; i < data.length; i++) {
+        const posterPath = API.POSTERPATH + data[i].poster_path;
+        const movieId = data[i].id
         movies.push(
           <MovieBlock
-            id={data[i].imdbID}
+            id={movieId}
             key={i}
-            Title={data[i].Title}
-            Year={data[i].Year}
-            Poster={data[i].Poster}
+            Title={data[i].original_title}
+            Year={new Date(data[i].release_date).getFullYear()}
+            Poster={posterPath}
             imdbID={data[i].imdbID}
-            onClick={(e, i) => this.handleMovieDetailClick(e, i)}>
+            onClick={(e, i) => this.handleMovieDetailClick(e, movieId)}>
           </MovieBlock>
         )
       }
@@ -106,19 +151,18 @@ class App extends React.Component {
           {movie ?
             (
               <MovieDetail
-                id={movie.imdbID}
-                Actors={movie.Actors}
-                Title={movie.Title}
-                Year={movie.Year}
-                Poster={movie.Poster}
-                Director={movie.Director}
-                Plot={movie.Plot}
-                Country={movie.Country}
-                Rated={movie.Rated}
-                imdbVotes={movie.imdbVotes}
-                Writer={movie.Writer}
-                imdbRating={movie.imdbRating}
-                imdbID={movie.imdbID}>
+                id={movie.id}
+                Title={movie.original_title}
+                Year={new Date(movie.release_date).getFullYear()}
+                Poster={movie.poster_path}
+                popularity={movie.popularity}              
+                Plot={movie.overview}
+                imdbVotes={movie.vote_count}
+                imdbRating={movie.vote_average}
+                imdbID={movie.imdbID}
+                budget={movie.budget}
+                homepage={movie.homepage}>
+                
               </MovieDetail>
             ) : (
               <div className="album py-5 bg-light">
@@ -139,3 +183,30 @@ class App extends React.Component {
 }
 
 export default App;
+/*
+​
+backdrop_path: "/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg"​
+belongs_to_collection: Object { id: 86311, name: "The Avengers Collection", poster_path: "/yFSIUVTCvgYrpalUktulvk3Gi5Y.jpg", … }
+budget: 356000000​
+genres: Array(3) [ {…}, {…}, {…} ]​
+homepage: "https://www.marvel.com/movies/avengers-endgame"​
+id: 299534​
+imdb_id: "tt4154796"​
+original_language: "en"​
+original_title: "Avengers: Endgame"​
+overview: "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos. With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos' actions and restore order to the universe once and for all, no matter what consequences may be in store."
+popularity: 231.505​
+poster_path: "/or06FN3Dka5tukK1e9sl16pB3iy.jpg"​
+production_companies: Array [ {…} ]​
+production_countries: Array [ {…} ]​
+release_date: "2019-04-24"​
+revenue: 2797800564​
+runtime: 181​
+spoken_languages: Array(3) [ {…}, {…}, {…} ]
+​status: "Released"​
+tagline: "Part of the journey is the end."​
+title: "Avengers: Endgame"​
+video: false​
+vote_average: 8.3​
+vote_count: 11522
+*/

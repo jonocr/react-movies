@@ -6,6 +6,7 @@ class MovieDeatil extends React.Component {
     }
 
     render() {
+        const posterPath = "https://image.tmdb.org/t/p/w500/" + this.props.Poster;
         return (
             <div className="container movie-detail">
                 <div className="card">
@@ -15,7 +16,7 @@ class MovieDeatil extends React.Component {
 
                                 <div className="preview-pic tab-content">
                                     <div className="tab-pane active" id="pic-1">
-                                        <img src={this.props.Poster} />
+                                        <img src={posterPath} />
                                     </div>
                                 </div>
 
@@ -43,13 +44,13 @@ class MovieDeatil extends React.Component {
                                     <h5>
                                         <strong>Casting: </strong>
                                     </h5>
-                                    {this.props.Actors}
+                                    EMpty
                                 </p>
                                 <p>
                                     <h5 className="product-description">
                                         <strong>Director: </strong> 
                                     </h5>
-                                    {this.props.Director}
+                                    EMpty
                                 </p>
                                 <p>
                                     <h5 className="product-description">
@@ -70,6 +71,69 @@ class MovieDeatil extends React.Component {
 }
 
 export default MovieDeatil;
+
+
+
+
+/*
+ id={movie.id}
+Title={movie.original_title}
+Year={movie.release_date}
+Poster={movie.poster_path}
+popularity={movie.popularity}              
+Plot={movie.overview}
+imdbVotes={movie.imdbVotes}
+imdbRating={movie.vote_average}
+imdbID={movie.imdbID}
+budget={movie.budget}
+homepage={movie.homepage}>
+                */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Data from movie
 // Actors: "Yukie Nakama, Joe Odagiri, Tomoka Kurotani, Erika Sawajiri"// ​

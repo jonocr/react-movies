@@ -7,8 +7,8 @@ function Footer() {
                 <p className="float-right">
                     <a href="#">Back to top</a>
                 </p>
-                <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
-                <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.4/getting-started/introduction/">getting started guide</a>.</p>
+                <p>This is a website built with React and Bootstrap</p>
+                <p>Want to check more projects, go to <a href="https://github.com/jonocr">GitHub</a></p>
             </div>
         </footer>
     )

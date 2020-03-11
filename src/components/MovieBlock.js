@@ -13,7 +13,7 @@ function MovieBlock(props) {
                     role="img"></img>
                 <div id="card-body" className="card-body">
                 <p className="card-text font-weight-bold">{props.Title} ({props.Year})</p>
-                <div className="d-flex justify-content-between align-items-center">
+                <div className="card-bottom">
                     <div className="btn-group">
                         <button type="button" className="btn btn-md btn-outline-secondary" onClick={(e, i) => props.onClick(e, props.imdbID)}>View</button>
                     </div>

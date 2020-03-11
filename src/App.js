@@ -123,8 +123,6 @@ class App extends React.Component {
     const loading = this.state.loading;
     let movies = [];
 
-    console.log("render movie data: ", movie);
-
     if (!loading && data) {
       for (let i = 0; i < data.length; i++) {
         const posterPath = API.POSTERPATH + data[i].poster_path;

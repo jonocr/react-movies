@@ -24,5 +24,29 @@
 }
 
 #card-body {
-  min-height: 140px; 
+  height: 90px;
+  padding: 0em;
+}
+
+.card-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.card-bottom {
+  display: block;
+  background-color: $dark-grey;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  .btn-group {
+    display: flex;
+    justify-content: center;
+  }
+  .btn-outline-secondary {
+    color: $text-contrast-color;
+  }
 }

@@ -15,7 +15,7 @@ https://test-a4801.firebaseapp.com
 ## Styles
 This app was developed mobile first.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project uses Bootstrap with Sass.
 
 ## Available Scripts
 
